@@ -1,0 +1,32 @@
+<div class="row">
+    <div class="col-sm-9">
+        <h1><%= @coffee[:shop_name] %></h1>
+
+        <% for reviews in @reviews %>
+            <div class="media">
+                <div class="media-body">
+                    <h5 class="mt-0">
+                        <%= @users_table.where(id: reviews[:users_id]).to_a[0][:name] %>
+
+                        <small>
+                            <!-- only show these links if it's my rsvp -->
+                            <% if @current_user && @current_user[:id] == rsvp[:user_id] %>
+                                (<a href="/reviews/<%= reviews[:id] %>/edit">edit</a> | <a href="/reviews/<%= reviews[:id] %>/destroy">delete</a>)
+                            <% end %>
+                        </small>
+                    </h5>
+                    <%= reviews[:comments] %>
+                </div>
+            </div>
+        <% end %>
+        
+        <p class="mt-5">
+            <% if @current_user %>
+                <a href="/coffee/<%= @coffee[:id] %>/reviews/new" class="btn btn-primary">Add a review!</a>
+            <% else %>
+                <a href="/logins/new" class="btn btn-danger">Log-in to add a review!!</a>
+            <% end %>
+        </p>
+    </div>
+
+</div> -->

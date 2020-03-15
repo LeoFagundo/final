@@ -1,5 +1,18 @@
 <h1>Coffee Shops!!!!!!</h1>
 
+        <div class="container">
+                <form action="/coffee/list">
+                <div class="form-row">
+                <div class="col-8">
+                <input type="text" name="location" placeholder="Gimme city!..." class="form-control">
+                </div>
+                <div class="col">
+                <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></submit>
+                                </div>
+            </div>
+                </form>
+
+
 <% for coffee in @coffee %>
-    <p><a href="/coffee/<%= coffee[:id] %>"><%= coffee[:shop_name] %></a></p>
+    <p><a href="/coffee/<%= coffee[:id] %>"><%= coffee[:shop_name] %> - <%= coffee[:location]%></a></p>
 <% end %>

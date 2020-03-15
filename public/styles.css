@@ -1,0 +1,65 @@
+body{
+    background-image: url("assets/triangle_mosaic.png");
+    font-family: 'Roboto', sans-serif;
+}
+
+h1{
+    color: black;
+    /* margin-top: 10px;
+    margin-bottom: 20px;
+    margin-left: 50px;
+    margin-right: 400px; */
+    /* border: 3px solid black; */
+    /* padding-left: 15px; */
+
+    /* background-color: rgb(235, 235, 235); */
+    font-family: 'Quicksand', sans-serif;
+}
+
+h2 {
+  margin-top: 50px !important;
+}
+
+h3 {
+  margin-top: 30px !important;
+  margin-bottom: 30px !important;
+}
+
+.thumbnail {
+    height: 180px;
+    /* width: 320px;*/
+}
+
+em{
+    text-transform: uppercase;
+    font-style: initial;
+}
+/* body{
+    background-color: blue;
+} */
+#first {
+    text-align: left;
+}
+/* #second {
+    text-align: right;
+} */
+.right {
+    text-align: right;
+}
+
+}
+.big {
+    font-size: 32px;
+}
+
+
+p {
+    /* text-align: center; */
+    font-family: helvetica;
+    /* background-color: rgb(221, 178, 153); */
+}
+
+.center {
+    margin-left:auto; 
+    margin-right:auto;
+  }

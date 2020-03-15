@@ -19,8 +19,7 @@ coffee_table = DB.from(:coffee)
 reviews_table = DB.from(:reviews)
 users_table = DB.from(:users)
 
-# google maps api
-# @maps = ENV["MAPS_KEY"]
+
 
 before do
     @current_user = users_table.where(id: session["users_id"]).to_a[0]
@@ -45,7 +44,9 @@ get "/coffee/:id" do
     @users_table = users_table
     @coffee = coffee_table.where(id: params[:id]).to_a[0]
     pp @coffee
-    # @maps = "AIzaSyBQIgwBjMrWqbnNp-M7PqtpRcjwLnlR8og"
+
+    # google maps api
+    @maps = ENV["MAPS_KEY"]
 
     @reviews = reviews_table.where(coffee_id: @coffee[:id]).to_a
     @avg_rating = reviews_table.where(coffee_id: @coffee[:id]).avg(:rating)

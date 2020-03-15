@@ -4,7 +4,8 @@ require "sinatra/reloader" if development?                                      
 require "sequel"                                                                      #
 require "logger"                                                                      #
 require "twilio-ruby"                                                                 #
-require "bcrypt"                                                                      #
+require "bcrypt"
+require "geocoder"                                                                      #
 connection_string = ENV['DATABASE_URL'] || "sqlite://#{Dir.pwd}/development.sqlite3"  #
 DB ||= Sequel.connect(connection_string)                                              #
 DB.loggers << Logger.new($stdout) unless DB.loggers.size > 0                          #
@@ -18,8 +19,12 @@ coffee_table = DB.from(:coffee)
 reviews_table = DB.from(:reviews)
 users_table = DB.from(:users)
 
+# google maps api
+# @maps = ENV["MAPS_KEY"]
+
 before do
     @current_user = users_table.where(id: session["users_id"]).to_a[0]
+
 end
 
 # homepage and list of events (aka "index")
@@ -29,16 +34,18 @@ get "/" do
     @coffee = coffee_table.all.to_a
     pp @coffee
 
+
+
     view "coffee"
 end
 
 # coffee details (aka "show")
 get "/coffee/:id" do
     puts "params: #{params}"
-
     @users_table = users_table
     @coffee = coffee_table.where(id: params[:id]).to_a[0]
     pp @coffee
+    # @maps = "AIzaSyBQIgwBjMrWqbnNp-M7PqtpRcjwLnlR8og"
 
     @reviews = reviews_table.where(coffee_id: @coffee[:id]).to_a
     @avg_rating = reviews_table.where(coffee_id: @coffee[:id]).avg(:rating)

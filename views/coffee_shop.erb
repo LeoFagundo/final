@@ -1,24 +1,39 @@
 <div class="row">
-    <div class="col-sm-9">
+    <div class="col-sm-8">
+        <div class="row">
+        <div class="col-sm-7">
         <h1><%= @coffee[:shop_name] %></h1>
-
+        </div>
+        <div class="col-sm-5">
+        <h1> Avg Rating: <%= @avg_rating %> </h1>
+        </div>
+        </div>
         <% for reviews in @reviews %>
-            <div class="media">
+        <div class="row">    
                 <div class="media-body">
+                <div class="row">
+                <div class="col-4">
                     <h5 class="mt-0">
                         <%= @users_table.where(id: reviews[:users_id]).to_a[0][:name] %>
 
                         <small>
                             <!-- only show these links if it's my rsvp -->
-                            <% if @current_user && @current_user[:id] == rsvp[:user_id] %>
+                            <% if @current_user && @current_user[:id] == reviews[:users_id] %>
                                 (<a href="/reviews/<%= reviews[:id] %>/edit">edit</a> | <a href="/reviews/<%= reviews[:id] %>/destroy">delete</a>)
                             <% end %>
                         </small>
                     </h5>
+                </div>
+                <div class ="col-4">
+                    <h5 class="mt-0">
+                    Rating: <%= reviews[:rating] %>
+                    </h5>
+                </div>
+                </div>
                     <%= reviews[:comments] %>
                 </div>
             </div>
-        <% end %>
+            <% end %>
         
         <p class="mt-5">
             <% if @current_user %>
@@ -29,4 +44,4 @@
         </p>
     </div>
 
-</div> -->
+</div> 

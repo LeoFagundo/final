@@ -8,7 +8,8 @@ DB = Sequel.connect(connection_string)                                          
 DB.create_table! :coffee do
   primary_key :id
   String :shop_name
-  String :location
+  String :city
+  String :state
 end
 DB.create_table! :reviews do
   primary_key :id
@@ -30,8 +31,10 @@ end
 coffee_table = DB.from(:coffee)
 
 coffee_table.insert(shop_name: "Newport Coffee", 
-                    location: "Evanston, IL")
+                    city: "Evanston",
+                    state: "IL")
 
 coffee_table.insert(shop_name: "Mojo Coffeehouse", 
-                    location: "New Orleans, LA")
+                    city: "New Orleans",
+                    state: "LA")
 puts "success"

@@ -33,7 +33,7 @@ get "/" do
     @coffee = coffee_table.all.to_a
     pp @coffee
 
-
+    
 
     view "coffee"
 end
@@ -62,13 +62,13 @@ get "/coffee/:id/reviews/new" do
     view "new_review"
 end
 
-# receive the submitted rsvp form (aka "create")
+# receive the submitted review form (aka "create")
 post "/coffee/:id/reviews/create" do
     puts "params: #{params}"
 
-    # first find the coffee that rsvp'ing for
+    # first find the coffee that reviewing for
     @coffee = coffee_table.where(id: params[:id]).to_a[0]
-    # next we want to insert a row in the rsvps table with the rsvp form data
+    # next we want to insert a row in the review table with the rewview form data
     reviews_table.insert(
         coffee_id: @coffee[:id],
         users_id: session["users_id"],
@@ -176,4 +176,30 @@ get "/logout" do
     # remove encrypted cookie for logged out user
     session["users_id"] = nil
     redirect "/logins/new"
+end
+
+# display the review form 
+get "/new_shop" do
+    puts "params: #{params}"
+
+    @coffee = coffee_table.where(id: params[:id]).to_a[0]
+    view "new_coffee_shop"
+end
+
+# receive the submitted coffee form (aka "create")
+post "/new_shop/create" do
+    puts "params: #{params}"
+
+
+    # next we want to insert a row in the coffee table with the coffee form data
+    coffee_table.insert(
+        state: params["state"],
+        city: params["city"],
+        shop_name: params["shop_name"]
+    )
+
+        # find the coffee that reviewing for
+    @coffee = coffee_table.max(:id)
+
+    redirect "/coffee/#{@coffee}"
 end

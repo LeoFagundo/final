@@ -12,12 +12,12 @@
         <div class="row">    
                 <div class="media-body">
                 <div class="row">
-                <div class="col-4">
+                <div class="col-6">
                     <h5 class="mt-0">
                         <%= @users_table.where(id: reviews[:users_id]).to_a[0][:name] %>
 
                         <small>
-                            <!-- only show these links if it's my rsvp -->
+                            <!-- only show these links if it's my review -->
                             <% if @current_user && @current_user[:id] == reviews[:users_id] %>
                                 (<a href="/reviews/<%= reviews[:id] %>/edit">edit</a> | <a href="/reviews/<%= reviews[:id] %>/destroy">delete</a>)
                             <% end %>
@@ -44,8 +44,10 @@
         </p>
     </div>
     <div class="col-sm-4">
-        <h3> <%= @coffee[:location]%>
+        <div class="row">
+        <h3>  <%= @coffee[:city]%>, <%= @coffee[:state]%>
         </h3>
+        </div>
             <iframe
         width="600"
         height="450"
